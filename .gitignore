@@ -1,0 +1,10 @@
+# MacOS files
+**/.DS_Store
+
+# VSCode files
+.vscode/
+
+# Visual Pardigm files
+**/*.vpp.lck
+**/*.vpp.bak*
+**/*.vpp.vbak*
