@@ -1,0 +1,345 @@
+@prefix : <http://example.com#>.
+@prefix gufo: <http://purl.org/nemo/gufo#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+<http://example.com> rdf:type owl:Ontology;
+    owl:imports gufo:.
+:GameEventType rdf:type owl:NamedIndividual;
+    rdfs:subClassOf gufo:ConcreteIndividualType;
+    rdfs:label "Game Event Type"@en.
+:EmotionalResponseType rdf:type owl:NamedIndividual;
+    rdfs:label "Emotional Response Type"@en.
+:Mechanic rdf:type owl:NamedIndividual;
+    rdfs:subClassOf gufo:ConcreteIndividualType;
+    rdfs:label "Mechanic"@en.
+:Algorithm rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:label "Algorithm"@en.
+:AestheticType rdf:type owl:NamedIndividual;
+    rdfs:subClassOf gufo:ConcreteIndividualType;
+    rdfs:label "Aesthetic Type"@en.
+:MentalDispositionType rdf:type owl:NamedIndividual;
+    rdfs:label "Mental Disposition Type"@en.
+:GameDynamicType rdf:type owl:NamedIndividual;
+    rdfs:label "Game Dynamic Type"@en.
+:GameMatchType rdf:type owl:NamedIndividual;
+    rdfs:label "Game Match Type"@en.
+:GameArtifactType rdf:type owl:NamedIndividual;
+    rdfs:label "Game Artifact Type"@en.
+:GameArtifact rdf:type owl:Class, gufo:Category, owl:NamedIndividual;
+    rdfs:label "Game Artifact"@en.
+:GameMatch rdf:type owl:Class, gufo:EventType, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Event;
+    rdfs:label "Game Match"@en.
+:GameDesigner rdf:type owl:Class, gufo:Role, owl:NamedIndividual;
+    rdfs:label "Game Designer"@en.
+:Person rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:FunctionalComplex;
+    rdfs:label "Person"@en.
+:GameSpecification rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:FunctionalComplex;
+    rdfs:label "Game Specification"@en.
+:Emotion rdf:type owl:Class, gufo:Category, owl:NamedIndividual;
+    rdfs:subClassOf gufo:IntrinsicMode;
+    rdfs:label "Emotion"@en.
+:Player rdf:type owl:Class, gufo:Role, owl:NamedIndividual;
+    rdfs:label "Player"@en.
+:GameDynamic rdf:type owl:Class, gufo:EventType, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Event;
+    rdfs:label "Game Dynamic"@en.
+:PlayerEmotionalResponse rdf:type owl:Class, gufo:EventType, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Event;
+    rdfs:label "Player Emotional Response"@en.
+:PlayerDecision rdf:type owl:Class, gufo:EventType, owl:NamedIndividual;
+    rdfs:label "Player Decision"@en.
+:Object rdf:type owl:Class, gufo:Category, owl:NamedIndividual;
+    rdfs:subClassOf gufo:FunctionalComplex;
+    rdfs:label "Object"@en.
+:PhysicalObject rdf:type owl:Class, gufo:Category, owl:NamedIndividual;
+    rdfs:label "Physical Object"@en.
+:DigitalObject rdf:type owl:Class, gufo:Category, owl:NamedIndividual;
+    rdfs:label "Digital Object"@en.
+:SocialObject rdf:type owl:Class, gufo:Category, owl:NamedIndividual;
+    rdfs:label "Social Object"@en.
+:MentalDisposition rdf:type owl:Class, gufo:Category, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Aspect, [
+  rdf:type owl:Class;
+  owl:unionOf (gufo:IntrinsicMode gufo:ExtrinsicMode)
+];
+    rdfs:label "Mental Disposition"@en.
+:GameBelief rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:IntrinsicMode;
+    rdfs:label "Game Belief"@en.
+:BeliefAboutDynamic rdf:type owl:Class, gufo:SubKind, owl:NamedIndividual;
+    rdfs:label "Belief about Dynamic"@en.
+:BeliefAboutAesthetic rdf:type owl:Class, gufo:SubKind, owl:NamedIndividual;
+    rdfs:label "Belief about Aesthetic"@en.
+:GameDesigner rdfs:subClassOf :Person.
+:Player rdfs:subClassOf :Person.
+:PlayerDecision rdfs:subClassOf :GameDynamic.
+:SocialObject rdfs:subClassOf :Object.
+:PhysicalObject rdfs:subClassOf :Object.
+:DigitalObject rdfs:subClassOf :Object.
+:GameArtifact rdfs:subClassOf :Object.
+:Emotion rdfs:subClassOf :MentalDisposition.
+:MentalDispositionType rdfs:subClassOf :AestheticType.
+:EmotionalResponseType rdfs:subClassOf :AestheticType.
+:GameMatchType rdfs:subClassOf :GameEventType.
+:GameDynamicType rdfs:subClassOf :GameEventType.
+:Algorithm rdfs:subClassOf :Mechanic.
+:GameArtifactType rdfs:subClassOf :Mechanic.
+:Algorithm rdfs:subClassOf :SocialObject.
+:GameBelief rdfs:subClassOf :MentalDisposition.
+:BeliefAboutDynamic rdfs:subClassOf :GameBelief.
+:BeliefAboutAesthetic rdfs:subClassOf :GameBelief.
+[ rdf:type owl:AllDisjointClasses ] owl:members (:DigitalObject :PhysicalObject :SocialObject).
+:Object owl:equivalentClass [
+  rdf:type owl:Class;
+  owl:unionOf (:DigitalObject :PhysicalObject :SocialObject)
+].
+[ rdf:type owl:AllDisjointClasses ] owl:members (:Algorithm :GameArtifactType).
+:Mechanic owl:equivalentClass [
+  rdf:type owl:Class;
+  owl:unionOf (:Algorithm :GameArtifactType)
+].
+[ rdf:type owl:AllDisjointClasses ] owl:members (:GameMatchType :GameDynamicType).
+:GameEventType owl:equivalentClass [
+  rdf:type owl:Class;
+  owl:unionOf (:GameMatchType :GameDynamicType)
+].
+[ rdf:type owl:AllDisjointClasses ] owl:members (:MentalDispositionType :EmotionalResponseType).
+:AestheticType owl:equivalentClass [
+  rdf:type owl:Class;
+  owl:unionOf (:MentalDispositionType :EmotionalResponseType)
+].
+[ rdf:type owl:AllDisjointClasses ] owl:members (:BeliefAboutDynamic :BeliefAboutAesthetic).
+:designs rdf:type owl:ObjectProperty;
+    rdfs:domain :GameDesigner;
+    rdfs:range :GameSpecification;
+    rdfs:label "designs"@en;
+    rdfs:subPropertyOf gufo:historicallyDependsOn.
+:mentalDispositionInheresInPerson rdf:type owl:ObjectProperty;
+    rdfs:domain :MentalDisposition;
+    rdfs:range :Person;
+    rdfs:subPropertyOf gufo:inheresIn.
+:gameDynamicIsEventProperPartOfGameDynamic rdf:type owl:ObjectProperty;
+    rdfs:domain :GameDynamic;
+    rdfs:range :GameDynamic;
+    rdfs:subPropertyOf gufo:isEventProperPartOf.
+:gameMatchIsEventProperPartOfGameDynamic rdf:type owl:ObjectProperty;
+    rdfs:domain :GameMatch;
+    rdfs:range :GameDynamic;
+    rdfs:subPropertyOf gufo:isEventProperPartOf.
+:playerDecisionParticipatedInPlayer rdf:type owl:ObjectProperty;
+    rdfs:domain :PlayerDecision;
+    rdfs:range :Player;
+    rdfs:subPropertyOf gufo:participatedIn.
+:playerParticipatedInGameMatch rdf:type owl:ObjectProperty;
+    rdfs:domain :Player;
+    rdfs:range :GameMatch;
+    rdfs:subPropertyOf gufo:participatedIn.
+:playerParticipatedInGameDynamic rdf:type owl:ObjectProperty;
+    rdfs:domain :Player;
+    rdfs:range :GameDynamic;
+    rdfs:subPropertyOf gufo:participatedIn.
+:objectParticipatedInGameDynamic rdf:type owl:ObjectProperty;
+    rdfs:domain :Object;
+    rdfs:range :GameDynamic;
+    rdfs:subPropertyOf gufo:participatedIn.
+:playerEmotionalResponseHistoricallyDependsOnGameDynamic rdf:type owl:ObjectProperty;
+    rdfs:domain :PlayerEmotionalResponse;
+    rdfs:range :GameDynamic;
+    rdfs:subPropertyOf gufo:historicallyDependsOn.
+:playerEmotionalResponseParticipatedInPlayer rdf:type owl:ObjectProperty;
+    rdfs:domain :PlayerEmotionalResponse;
+    rdfs:range :Player;
+    rdfs:subPropertyOf gufo:participatedIn.
+:playerEmotionalResponseManifestedInEmotion rdf:type owl:ObjectProperty;
+    rdfs:domain :PlayerEmotionalResponse;
+    rdfs:range :Emotion;
+    rdfs:subPropertyOf gufo:manifestedIn.
+:mentalDispositionManifestedInEmotion rdf:type owl:ObjectProperty;
+    rdfs:domain :MentalDisposition;
+    rdfs:range :Emotion;
+    rdfs:subPropertyOf gufo:manifestedIn.
+:usedIn rdf:type owl:ObjectProperty;
+    rdfs:domain :Object;
+    rdfs:range :GameArtifact;
+    rdfs:label "used in"@en;
+    rdfs:subPropertyOf gufo:participatedIn.
+:gameDynamicTypeHasGameMatchType rdf:type owl:ObjectProperty;
+    rdfs:domain :GameDynamicType;
+    rdfs:range :GameMatchType.
+:GameMatchType gufo:categorizes :GameMatch.
+:requires rdf:type owl:ObjectProperty;
+    rdfs:domain :GameMatchType;
+    rdfs:range :GameArtifactType;
+    rdfs:label "requires"@en.
+:GameArtifactType gufo:categorizes :GameArtifact.
+:influences rdf:type owl:ObjectProperty;
+    rdfs:domain :MentalDispositionType;
+    rdfs:range :GameDynamicType;
+    rdfs:label "influences"@en.
+:canCause rdf:type owl:ObjectProperty;
+    rdfs:domain :GameEventType;
+    rdfs:range :EmotionalResponseType;
+    rdfs:label "can cause"@en.
+:defines rdf:type owl:ObjectProperty;
+    rdfs:domain :GameSpecification;
+    rdfs:range :GameEventType;
+    rdfs:label "defines"@en.
+:EmotionalResponseType gufo:categorizes :PlayerEmotionalResponse.
+:predicts rdf:type owl:ObjectProperty;
+    rdfs:domain :BeliefAboutAesthetic;
+    rdfs:range :AestheticType;
+    rdfs:label "predicts"@en;
+    rdfs:subPropertyOf gufo:externallyDependsOn.
+:MentalDispositionType gufo:categorizes :MentalDisposition.
+:GameDynamicType gufo:categorizes :GameDynamic.
+:enables rdf:type owl:ObjectProperty;
+    rdfs:domain :Mechanic;
+    rdfs:range :GameEventType;
+    rdfs:label "enables"@en.
+:defines_1 rdf:type owl:ObjectProperty;
+    rdfs:domain :GameSpecification;
+    rdfs:range :Mechanic;
+    rdfs:label "defines"@en.
+:gameDesignerInheresInGameBelief rdf:type owl:ObjectProperty;
+    rdfs:domain :GameDesigner;
+    rdfs:range :GameBelief;
+    rdfs:subPropertyOf gufo:inheresIn.
+:predicts_1 rdf:type owl:ObjectProperty;
+    rdfs:domain :BeliefAboutDynamic;
+    rdfs:range :GameEventType;
+    rdfs:label "predicts"@en;
+    rdfs:subPropertyOf gufo:externallyDependsOn.
+:isAbout_1 rdf:type owl:ObjectProperty;
+    rdfs:domain :BeliefAboutAesthetic;
+    rdfs:range :GameDynamicType;
+    rdfs:label "isAbout"@en;
+    rdfs:subPropertyOf gufo:externallyDependsOn.
+:isAbout rdf:type owl:ObjectProperty;
+    rdfs:domain :BeliefAboutDynamic;
+    rdfs:range :Mechanic;
+    rdfs:label "isAbout"@en;
+    rdfs:subPropertyOf gufo:externallyDependsOn.
+:GameSpecification rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf :designs ];
+  owl:someValuesFrom :GameDesigner
+].
+:GameDesigner rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty :designs;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :GameSpecification
+].
+:Person rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf :mentalDispositionInheresInPerson ];
+  owl:someValuesFrom :MentalDisposition
+].
+:MentalDisposition rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty :mentalDispositionInheresInPerson;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :Person
+].
+:Player rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf :playerDecisionParticipatedInPlayer ];
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :PlayerDecision
+].
+:GameMatch rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf :playerParticipatedInGameMatch ];
+  owl:someValuesFrom :Player
+].
+:Player rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty :playerParticipatedInGameMatch;
+  owl:someValuesFrom :GameMatch
+].
+:PlayerEmotionalResponse rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty :playerEmotionalResponseHistoricallyDependsOnGameDynamic;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :GameDynamic
+].
+:Player rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf :playerEmotionalResponseParticipatedInPlayer ];
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :PlayerEmotionalResponse
+].
+:Emotion rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf :playerEmotionalResponseManifestedInEmotion ];
+  owl:someValuesFrom :PlayerEmotionalResponse
+], [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf :mentalDispositionManifestedInEmotion ];
+  owl:someValuesFrom :MentalDisposition
+].
+:AestheticType rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf :predicts ];
+  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :BeliefAboutAesthetic
+].
+:BeliefAboutAesthetic rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty :predicts;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :AestheticType
+].
+:GameBelief rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf :gameDesignerInheresInGameBelief ];
+  owl:someValuesFrom :GameDesigner
+].
+:GameDesigner rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty :gameDesignerInheresInGameBelief;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :GameBelief
+].
+:GameEventType rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf :predicts_1 ];
+  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :BeliefAboutDynamic
+].
+:BeliefAboutDynamic rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty :predicts_1;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :GameEventType
+].
+:GameDynamicType rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf :isAbout_1 ];
+  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :BeliefAboutAesthetic
+].
+:BeliefAboutAesthetic rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty :isAbout_1;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :GameDynamicType
+].
+:Mechanic rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf :isAbout ];
+  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :BeliefAboutDynamic
+].
+:BeliefAboutDynamic rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty :isAbout;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass :Mechanic
+].
